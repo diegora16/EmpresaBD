@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+
+.encabezadOFF{
+    @apply mx-0.5 font-bold bg-blue-900 py-3 text-white md:w-72 text-center rounded-full border-double border-4 border-sky-500 list-none
+}
+
+.encabezadON{
+    @apply mx-0.5 font-bold bg-purple-700 py-3 text-white md:w-72 text-center rounded-full border-double border-4 border-purple-400 list-none
+}
+
+.fondo{
+    @apply bg-gradient-to-t from-blue-950 to-black min-h-screen
+}
+
+@tailwind utilities;
