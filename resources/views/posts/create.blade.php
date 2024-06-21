@@ -8,18 +8,19 @@
 <div>
     <h1 class="font-bold">FORMULARIO - AGREGAR PERSONAS</h1>
 
-    <form class="space-y-4 bg-purple-900 py-8 px-20 rounded-3xl">
-        
+    <form action="{{ route('posts.store') }}" method="POST" class="space-y-4 bg-purple-900 py-8 px-20 rounded-3xl">
+        @csrf    
+
         {{-- NOMBRE - APELLIDO --}}
         <div class="md:flex md:space-x-4">
             <label class="block w-full">
                 <span class="font-bold">Nombre</span>
-                <input type="text" name="" id="" class="text-black w-full mt-1">
+                <input type="text" name="cPerNombre" id="" class="text-black w-full mt-1">
             </label>
 
             <label class="block w-full">
                 <span class="font-bold">Apellido</span>
-                <input type="text" name="" id="" class="text-black w-full mt-1">
+                <input type="text" name="cPerApellido" id="" class="text-black w-full mt-1">
             </label>
         </div>
 
@@ -27,12 +28,12 @@
         <div class="md:flex md:space-x-4">
             <label class="block w-full">
                 <span class="font-bold">Direccion</span>
-                <input type="text" name="" id="" class="text-black w-full mt-1">
+                <input type="text" name="cPerDireccion" id="" class="text-black w-full mt-1">
             </label>
 
             <label class="block w-full">
                 <span class="font-bold">Fecha de Nacimiento</span>
-                <input type="date" name="" id="" class="text-black w-full mt-1">
+                <input type="date" name="dPerFecNac" id="" class="text-black w-full mt-1">
             </label>
         </div>
 
@@ -40,12 +41,12 @@
         <div class="md:flex md:space-x-4">
             <label class="block w-full">
                 <span class="font-bold">Edad</span>
-                <input type="number" name="" id="" class="text-black w-full mt-1" min="0" step="1">
+                <input type="number" name="nPerEdad" id="" class="text-black w-full mt-1" min="0" step="1">
             </label>
 
             <label class="block w-full">
                 <span class="font-bold">Sueldo</span>
-                <input type="number" name="" id="" class="text-black w-full mt-1" min="0">
+                <input type="number" name="nPerSueldo" id="" class="text-black w-full mt-1" min="0">
             </label>
         </div>
 
@@ -62,7 +63,7 @@
 
         <div>
         <a href="">
-            <button class="font-bold bg-blue-500 hover:bg-blue-700 rounded-full px-4 py-1 mt-4">Registrar</button>
+            <button type="submit" class="font-bold bg-blue-500 hover:bg-blue-700 rounded-full px-4 py-1 mt-4">Registrar</button>
             </a>
         </div>
           </form>

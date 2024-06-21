@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('persona', function (Blueprint $table) {
+        Schema::create('personas', function (Blueprint $table) {
             $table->bigIncrements('nPerCodigo');
             $table->char('cPerApellido', 50);
             $table->char('cPerNombre', 50);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Persona;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,7 +13,7 @@ class personasController extends Controller
      */
     public function index()
     {
-        $personas =DB::table('persona')->get();
+        $personas =Persona::get();
 
         return view('personas', compact('personas'));
     }
@@ -30,7 +31,18 @@ class personasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $personas =new Persona;
+        $personas->cPerNombre = $request->input('cPerNombre');
+        $personas->cPerApellido = $request->input('cPerApellido');
+        $personas->cPerDireccion = $request->input('cPerDireccion');
+        $personas->dPerFecNac = $request->input('dPerFecNac');
+        $personas->nPerEdad = $request->input('nPerEdad');
+        $personas->nPerSueldo = $request->input('nPerSueldo');
+        $personas->nPerEstado = $request->input('nPerEstado');
+        $personas->cPerRnd = $request->input('cPerRnd', ''); 
+        $personas ->save();
+
+        return redirect()->route('personas');
     }
 
     /**

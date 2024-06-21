@@ -11,6 +11,7 @@ Route::get('/', function () {
 // Definir explícitamente la ruta para contacto
 Route::get('/personas', [personasController::class, 'index'])->name('personas');
 Route::get('/personas/create', [personasController::class, 'create'])->name('posts.create');
+Route::post('/personas', [personasController::class, 'store'])->name('posts.store');
 
 
 Route::get('/contacto', function () {
