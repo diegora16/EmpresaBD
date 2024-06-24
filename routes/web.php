@@ -12,6 +12,9 @@ Route::get('/', function () {
 Route::get('/personas', [personasController::class, 'index'])->name('personas');
 Route::get('/personas/create', [personasController::class, 'create'])->name('posts.create');
 Route::post('/personas', [personasController::class, 'store'])->name('posts.store');
+Route::get('/personas/{persona}', [personasController::class, 'show'])->name('personas.show');
+Route::get('/personas/{persona}/edit', [personasController::class, 'edit'])->name('posts.edit');
+Route::patch('/personas/{persona}', [personasController::class, 'update'])->name('posts.update');
 
 
 Route::get('/contacto', function () {

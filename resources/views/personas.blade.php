@@ -10,7 +10,11 @@
 
 @foreach ($personas as $item )
 
-    <li>{{ $item->cPerNombre }} {{ $item->cPerApellido}}</li>
+    <div class="md: flex">
+         <li class="mx-2">{{ $item->cPerNombre }} {{ $item->cPerApellido}}</li> <a class="text-sky-300" href="{{route('posts.edit',$item)}}">Editar</a>
+    </div>
+
+    
     
 @endforeach
 

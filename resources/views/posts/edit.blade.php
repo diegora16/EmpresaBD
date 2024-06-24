@@ -6,16 +6,16 @@
 <section class="md:flex md:justify-center">
 
 <div>
-    <h1 class="font-bold">FORMULARIO - AGREGAR PERSONAS</h1>
+    <h1 class="font-bold">ACTUALIZAR DATOS DE PERSONAS</h1>
 
-    <form action="{{ route('posts.store') }}" method="POST" class="space-y-4 bg-purple-900 py-8 px-20 rounded-3xl">
-        @csrf    
+    <form action="{{ route('posts.update', $persona) }}" method="POST" class="space-y-4 bg-purple-900 py-8 px-20 rounded-3xl">
+        @csrf    @method('PATCH')
 
         {{-- NOMBRE - APELLIDO --}}
         <div class="md:flex md:space-x-4">
             <label class="block w-full">
                 <span class="font-bold">Nombre</span>
-                <input type="text" name="cPerNombre" id="" class="text-black w-full mt-1" value="{{old('cPerNombre')}}">
+                <input type="text" name="cPerNombre" id="" class="text-black w-full mt-1" value="{{old('cPerNombre', $persona->cPerNombre)}}">
                 @error('cPerNombre')
                     <br>
                     <small class="text-red-500">Complete el campo Nombre</small>
@@ -24,7 +24,7 @@
 
             <label class="block w-full">
                 <span class="font-bold">Apellido</span>
-                <input type="text" name="cPerApellido" id="" class="text-black w-full mt-1" value="{{old('cPerApellido')}}">
+                <input type="text" name="cPerApellido" id="" class="text-black w-full mt-1" value="{{old('cPerApellido', $persona->cPerApellido)}}">
                 @error('cPerApellido')
                     <br>
                     <small class="text-red-500">Complete el campo Apellido</small>
@@ -36,7 +36,7 @@
         <div class="md:flex md:space-x-4">
             <label class="block w-full">
                 <span class="font-bold">Direccion</span>
-                <input type="text" name="cPerDireccion" id="" class="text-black w-full mt-1" value="{{old('cPerDireccion')}}">
+                <input type="text" name="cPerDireccion" id="" class="text-black w-full mt-1" value="{{old('cPerDireccion', $persona->cPerDireccion)}}">
                 @error('cPerDireccion')
                     <br>
                     <small class="text-red-500">Complete el campo Direccion</small>
@@ -45,7 +45,7 @@
 
             <label class="block w-full">
                 <span class="font-bold">Fecha de Nacimiento</span>
-                <input type="date" name="dPerFecNac" id="" class="text-black w-full mt-1" value="{{old('dPerFecNac')}}">
+                <input type="date" name="dPerFecNac" id="" class="text-black w-full mt-1" value="{{old('dPerFecNac', $persona->dPerFecNac)}}">
                 @error('dPerFecNac')
                     <br>
                     <small class="text-red-500">Complete el campo Fecha de Nacimiento</small>
@@ -57,7 +57,7 @@
         <div class="md:flex md:space-x-4">
             <label class="block w-full">
                 <span class="font-bold">Edad</span>
-                <input type="number" name="nPerEdad" id="" class="text-black w-full mt-1" min="0" step="1" value="{{old('cPerEdad')}}">
+                <input type="number" name="nPerEdad" id="" class="text-black w-full mt-1" min="0" step="1" value="{{old('nPerEdad', $persona->nPerEdad)}}">
                 @error('nPerEdad')
                     <br>
                     <small class="text-red-500">Complete el campo Edad</small>
@@ -66,7 +66,7 @@
 
             <label class="block w-full">
                 <span class="font-bold">Sueldo</span>
-                <input type="number" name="nPerSueldo" id="" class="text-black w-full mt-1" min="0" value="{{old('nPerSueldo')}}">
+                <input type="number" name="nPerSueldo" id="" class="text-black w-full mt-1" min="0" value="{{old('nPerSueldo', $persona->nPerSueldo)}}">
                 @error('nPerSueldo')
                     <br>
                     <small class="text-red-500">Complete el campo Sueldo</small>
@@ -78,11 +78,12 @@
         <div class="md:flex md:space-x-4">
             <label class="block w-full">
                 <span class="font-bold">Estado</span>
-                <select name="nPerEstado" id="nPerEstado" class="text-black w-full mt-1" value="{{old('nPerEstado')}}">
-                    <option value="" disabled selected>Seleccione el estado</option>
-                    <option value="1">1</option>
-                    <option value="0">0</option>
+                <select name="nPerEstado" id="nPerEstado" class="text-black w-full mt-1">
+                    <option value="" disabled {{ is_null($persona->nPerEstado) ? 'selected' : '' }}>Seleccione el estado</option>
+                    <option value="1" {{ $persona->nPerEstado == 1 ? 'selected' : '' }}>1</option>
+                    <option value="0" {{ $persona->nPerEstado == 0 ? 'selected' : '' }}>0</option>
                 </select>
+
                 @error('nPerEstado')
                     <br>
                     <small class="text-red-500">Complete el campo Estado</small>
@@ -92,7 +93,7 @@
 
         <div>
         <a href="">
-            <button type="submit" class="font-bold bg-blue-500 hover:bg-blue-700 rounded-full px-4 py-1 mt-4">Registrar</button>
+            <button type="submit" class="font-bold bg-blue-500 hover:bg-blue-700 rounded-full px-4 py-1 mt-4">Actualizar</button>
             </a>
         </div>
           </form>
