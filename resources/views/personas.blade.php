@@ -11,7 +11,13 @@
 @foreach ($personas as $item )
 
     <div class="md: flex">
-         <li class="mx-2">{{ $item->cPerNombre }} {{ $item->cPerApellido}}</li> <a class="text-sky-300" href="{{route('posts.edit',$item)}}">Editar</a>
+         <li class="mx-2">{{ $item->cPerNombre }} {{ $item->cPerApellido}}</li> 
+         <a class="text-sky-300" href="{{route('posts.edit',$item)}}">Editar</a>
+         <form action="{{ route('posts.destroy', $item) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="mx-2 text-red-500">Eliminar</button>
+         </form>
     </div>
 
     
