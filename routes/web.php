@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\personasController;
 
@@ -8,7 +9,7 @@ Route::get('/', function () {
 })->name('inicio');
 
 
-// Definir explícitamente la ruta para contacto
+// Definir explícitamente la ruta para personas
 Route::get('/personas', [personasController::class, 'index'])->name('personas');
 Route::get('/personas/create', [personasController::class, 'create'])->name('posts.create');
 Route::post('/personas', [personasController::class, 'store'])->name('posts.store');
@@ -18,10 +19,12 @@ Route::patch('/personas/{persona}', [personasController::class, 'update'])->name
 Route::delete('/personas/{persona}', [personasController::class, 'destroy'])->name('posts.destroy');
 
 
+
 Route::get('/contacto', function () {
     return view('contacto');
 })->name('contacto');
 
+Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.store');
 
 
 

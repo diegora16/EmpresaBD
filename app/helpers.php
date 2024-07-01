@@ -1,5 +1,7 @@
 <?php
-    function setActivo($ruta){
+if (!function_exists('setActivo')) {
+    function setActivo($ruta) {
         return request()->routeIs($ruta) ? 'encabezadON' : 'encabezadOFF';
     }
+}
 ?>
