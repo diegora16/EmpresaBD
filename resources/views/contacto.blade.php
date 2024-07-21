@@ -3,6 +3,13 @@
 @section('title', 'Contacto')
 
 @section('content')
+
+<div class="status mb-5 w-full flex justify-center text-center font-bold text-green-400 text-2xl">
+  {{ session('statusC') }}
+</div>
+
+
+
 <section class="md:flex md:justify-center">
 
 <div>

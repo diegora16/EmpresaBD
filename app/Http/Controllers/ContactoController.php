@@ -20,7 +20,9 @@ class ContactoController extends Controller
         //Enviar correo
         Mail::to('t512701520@unitru.edu.pe')->send(new MensajeRecibido($msg));
 
-        Return 'Mensaje Enviado';
+        session()->flash('statusC', '¡Mensaje Enviado, muchas gracias por comunicarse con nosotros!');
+
+        return redirect()->route('contacto');
 
 
             }

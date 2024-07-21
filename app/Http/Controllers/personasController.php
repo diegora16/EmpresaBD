@@ -35,6 +35,8 @@ class personasController extends Controller
         
         Persona::create($request->validated());
 
+        session()->flash('status', '¡Persona agregada correctamente!');
+
         return redirect()->route('personas');
     }
 

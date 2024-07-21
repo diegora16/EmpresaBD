@@ -3,10 +3,18 @@
 @section('title', 'Personas')
 
 @section('content')
+
+<div class="status mb-5 mx-24 font-bold text-green-400 text-2xl">{{session('status')}}</div>
+
 <section class="md:flex md:justify-around">
+
+
 
 <div>
 <h1 class="font-bold">PERSONAS DISPONIBLES</h2>
+
+
+
 
 @foreach ($personas as $item )
 
