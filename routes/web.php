@@ -1,42 +1,42 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ContactoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\personasController;
 
+// Home
 Route::get('/', function () {
     return view('inicio');
 })->name('inicio');
 
+Route::resource('personas', personasController::class)->names([
+    'index' => 'personas',
+    'create' => 'posts.create',
+    'store' => 'posts.store',
+    'show' => 'personas.show',
+    'edit' => 'posts.edit',
+    'update' => 'posts.update',
+    'destroy' => 'posts.destroy',
+])->middleware('auth');
 
-// Definir explícitamente la ruta para personas
-Route::get('/personas', [personasController::class, 'index'])->name('personas');
-Route::get('/personas/create', [personasController::class, 'create'])->name('posts.create');
-Route::post('/personas', [personasController::class, 'store'])->name('posts.store');
-Route::get('/personas/{persona}', [personasController::class, 'show'])->name('personas.show');
-Route::get('/personas/{persona}/edit', [personasController::class, 'edit'])->name('posts.edit');
-Route::patch('/personas/{persona}', [personasController::class, 'update'])->name('posts.update');
-Route::delete('/personas/{persona}', [personasController::class, 'destroy'])->name('posts.destroy');
-
-
-
+ 
+// Contacto - EMAIL
 Route::get('/contacto', function () {
     return view('contacto');
 })->name('contacto');
 
 Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.store');
 
+// Registrar Usuario
+Route::get('/register', function(){
+    return view('auth.register');
+})->name('register');
 
+Route::post('/register', [RegisteredUserController::class, 'store']);
 
+// Login
 
-
-
-
-
-
-
-
-
-
-
-
+Route::get('/login', function(){
+    return 'Login page';
+})->name('login');
