@@ -18,5 +18,6 @@ class Persona extends Model
         'nPerSueldo',
         'nPerEstado',
         'cPerRnd',
+        'image',
     ];
 }

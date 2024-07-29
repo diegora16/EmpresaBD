@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SavePersonaRequest;
 use App\Models\Persona;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class personasController extends Controller
 {
@@ -14,7 +14,7 @@ class personasController extends Controller
      */
     public function index()
     {
-        $personas =Persona::get();
+        $personas = Persona::get();
 
         return view('personas', compact('personas'));
     }
@@ -24,7 +24,7 @@ class personasController extends Controller
      */
     public function create()
     {
-        return view('posts.create', ['persona'=> New Persona]);
+        return view('posts.create', ['persona' => new Persona]);
     }
 
     /**
@@ -32,9 +32,18 @@ class personasController extends Controller
      */
     public function store(SavePersonaRequest $request)
     {
-        
-        Persona::create($request->validated());
+        // Validar los datos del formulario
+        $data = $request->validated();
 
+        // Manejar la subida de la imagen si existe
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('images', 'public');
+        }
+
+        // Crear una nueva persona con los datos validados
+        Persona::create($data);
+
+        // Mensaje de éxito
         session()->flash('status', '¡Persona agregada correctamente!');
 
         return redirect()->route('personas');
@@ -53,7 +62,7 @@ class personasController extends Controller
      */
     public function edit(Persona $persona)
     {
-        return view('posts.edit', ['persona'=>$persona]);
+        return view('posts.edit', ['persona' => $persona]);
     }
 
     /**
@@ -61,10 +70,24 @@ class personasController extends Controller
      */
     public function update(SavePersonaRequest $request, Persona $persona)
     {
-           
-            $persona->update($request->validated());
-    
-            return redirect()->route('personas');
+        // Validar los datos del formulario
+        $data = $request->validated();
+
+        // Manejar la subida de la nueva imagen si existe
+        if ($request->hasFile('image')) {
+            // Eliminar la imagen anterior si existe
+            if ($persona->image) {
+                Storage::disk('public')->delete($persona->image);
+            }
+
+            // Guardar la nueva imagen
+            $data['image'] = $request->file('image')->store('images', 'public');
+        }
+
+        // Actualizar la persona con los datos validados
+        $persona->update($data);
+
+        return redirect()->route('personas');
     }
 
     /**
@@ -72,6 +95,12 @@ class personasController extends Controller
      */
     public function destroy(Persona $persona)
     {
+        // Eliminar la imagen de la persona si existe
+        if ($persona->image) {
+            Storage::disk('public')->delete($persona->image);
+        }
+
+        // Eliminar la persona de la base de datos
         $persona->delete();
 
         return to_route('personas');
