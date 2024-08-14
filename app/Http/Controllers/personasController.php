@@ -12,11 +12,21 @@ class personasController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $personas = Persona::get();
+        $estado = $request->get('estado', 'todos'); // Por defecto, "todos"
 
-        return view('personas', compact('personas'));
+        // Filtrar personas según el estado proporcionado
+        if ($estado == '0') {
+            $personas = Persona::where('nPerEstado', '0')->get();
+        } elseif ($estado == '1') {
+            $personas = Persona::where('nPerEstado', '1')->get();
+        } else {
+            // Por defecto, mostrar todas las personas
+            $personas = Persona::all();
+        }
+
+        return view('personas', compact('personas', 'estado'));
     }
 
     /**
